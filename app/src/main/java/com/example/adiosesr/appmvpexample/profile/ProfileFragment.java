@@ -11,13 +11,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.adiosesr.appmvpexample.R;
+import com.example.adiosesr.appmvpexample.util.Navigator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     ProfileContract.Presenter presenter;
+
     @BindView(R.id.tvUsername)
     TextView tvUsername;
 
@@ -53,4 +56,16 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     public void showUsername(String username) {
         tvUsername.setText(username);
     }
+
+    @Override
+    public void goToSignup() {
+        Navigator.navigateFragmentToSignupActivity(getActivity());
+    }
+
+    @OnClick(R.id.btnClose)
+    public void btnClose()
+    {
+        presenter.closeSession();
+    }
+
 }

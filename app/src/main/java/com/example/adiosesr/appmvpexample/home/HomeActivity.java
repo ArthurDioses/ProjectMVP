@@ -18,10 +18,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
 
     private HomePresenter presenter;
 
-
-//    @BindView(R.id.tbToolBar)
-//    Toolbar tbToolBar;
-
     @BindView(R.id.tlTabLayout)
     TabLayout tlTabLayout;
 
@@ -54,9 +50,6 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
     void initActivity() {
         presenter = new HomePresenter(this);
         presenter.start();
-
-//        setSupportActionBar(tbToolBar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setupViewPager(vpViewPager);
         tlTabLayout.setupWithViewPager(vpViewPager);
         setupTabIcons();
