@@ -8,5 +8,9 @@
     <dimen name="seventytwodp">72dp</dimen>
     <dimen name="twohundredfourdp">204dp</dimen>
     <dimen name="twentyfourdp">24dp</dimen>
+    <!--dimen sp-->
+    <dimen name="twentysp">20sp</dimen>
+    <dimen name="twentyfivesp">25sp</dimen>
     <dimen name="thirtysp">30sp</dimen>
+    <dimen name="fifteensp">15sp</dimen>
 </resources>

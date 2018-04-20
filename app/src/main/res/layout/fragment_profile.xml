@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.adiosesr.appmvpexample.profile.ProfileFragment">
+    tools:weakReference="com.example.adiosesr.appmvpexample.profile.ProfileFragment">
 
     <TextView
         android:id="@+id/tvUsername"
@@ -21,9 +21,9 @@
     <ImageButton
         android:id="@+id/btnClose"
         android:layout_width="@dimen/zerodp"
-        android:layout_height="match_parent"
-        android:layout_marginEnd="@dimen/sixteendp"
-        android:layout_marginTop="@dimen/sixteendp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/twentyfourdp"
+        android:layout_marginTop="@dimen/twentyfourdp"
         android:background="@color/colorTransparent"
         android:src="@drawable/ic_logout"
         android:text="@string/close"

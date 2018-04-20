@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.adiosesr.appmvpexample.BaseActivity;
 import com.example.adiosesr.appmvpexample.R;
 import com.example.adiosesr.appmvpexample.util.Navigator;
 
@@ -59,7 +60,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
 
     @Override
     public void goToSignup() {
-        Navigator.navigateFragmentToSignupActivity(getActivity());
+        Navigator.navigateToSignupActivity((BaseActivity) getActivity());
     }
 
     @OnClick(R.id.btnClose)
