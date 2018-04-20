@@ -2,12 +2,14 @@ package com.example.adiosesr.appmvpexample.addTask;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.support.design.widget.TextInputEditText;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 
 import com.example.adiosesr.appmvpexample.BaseActivity;
 import com.example.adiosesr.appmvpexample.R;
@@ -23,7 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
-public class AddTaskActivity extends BaseActivity implements AddTaskContract.View, DatePickerDialog.OnDateSetListener {
+public class AddTaskActivity extends BaseActivity implements AddTaskContract.View, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     @BindView(R.id.tilTitle)
     TextInputLayout tilTitle;
@@ -31,6 +33,8 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
     TextInputLayout tilDescription;
     @BindView(R.id.tilDateEnd)
     TextInputLayout tilDateEnd;
+    @BindView(R.id.tilTimeEnd)
+    TextInputLayout tilTimeEnd;
     @BindView(R.id.tilTypeTask)
     TextInputLayout tilTypeTask;
 
@@ -40,6 +44,8 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
     TextInputEditText tietDescription;
     @BindView(R.id.tietDateEnd)
     TextInputEditText tietDateEnd;
+    @BindView(R.id.tietTimeEnd)
+    TextInputEditText tietTimeEnd;
     @BindView(R.id.tietTypeTask)
     TextInputEditText tietTypeTask;
 
@@ -65,6 +71,11 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
 
     @OnClick(R.id.tietDateEnd)
     public void tietDateEnd() {
+        showCalendar();
+    }
+
+    @OnClick(R.id.tietTimeEnd)
+    public void tietTimeEnd() {
         showClock();
     }
 
@@ -74,7 +85,9 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
         hideMessageTitle();
         hideMessageDescription();
         hideMessageDateEnd();
+        hideMessageTimeEnd();
         hideMessageTypeTask();
+
     }
 
     @Override
@@ -87,17 +100,53 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
         return this;
     }
 
+
     @Override
-    public Task getTask() {
-        Task task = new Task();
-        task.setTitle(tietTitle.getText().toString());
-        task.setDescTask(tietDescription.getText().toString());
-        task.setDateEnd(tietDateEnd.getText().toString());
-        task.setTypeTask(tietTypeTask.getText().toString());
-        task.setPriority(spPriority.getSelectedItem().toString());
-        task.setStatus(spStatus.getSelectedItem().toString());
-        return task;
+    public String getDescription() {
+        return tietDescription.getText().toString();
     }
+
+    @Override
+    public String getDateEnd() {
+        return tietDateEnd.getText().toString();
+    }
+
+    @Override
+    public String getTimeEnd() {
+        return tietTimeEnd.getText().toString();
+    }
+
+    @Override
+    public String getTypeTask() {
+        return tietTypeTask.getText().toString();
+    }
+
+    @Override
+    public String getPriority() {
+        return spPriority.getSelectedItem().toString();
+    }
+
+    @Override
+    public String getStatus() {
+        return spStatus.getSelectedItem().toString();
+    }
+
+    @Override
+    public String getTitleTask() {
+        return tietTitle.getText().toString();
+    }
+
+//    @Override
+//    public Task getTask() {
+//        Task task = new Task();
+//        task.setTitle(tietTitle.getText().toString());
+//        task.setDescTask(tietDescription.getText().toString());
+//        task.setDateEnd(tietDateEnd.getText().toString() + tietTimeEnd.getText());
+//        task.setTypeTask(tietTypeTask.getText().toString());
+//        task.setPriority(spPriority.getSelectedItem().toString());
+//        task.setStatus(spStatus.getSelectedItem().toString());
+//        return task;
+//    }
 
     @Override
     public void closeActivity() {
@@ -123,9 +172,25 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
     }
 
     @Override
+    public void showMessageTimeEnd(String message) {
+        tilTimeEnd.setErrorEnabled(true);
+        tilTimeEnd.setError(message);
+    }
+
+    @Override
     public void showMessageTypeTask(String message) {
         tilTypeTask.setErrorEnabled(true);
         tilTypeTask.setError(message);
+    }
+
+    @Override
+    public void showMessagePriority(String message) {
+
+    }
+
+    @Override
+    public void showMessageStatus(String message) {
+
     }
 
     @Override
@@ -153,6 +218,14 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
     }
 
     @Override
+    public void hideMessageTimeEnd() {
+        if (tilTimeEnd.isErrorEnabled()) {
+            tilTimeEnd.setErrorEnabled(false);
+            tilTimeEnd.setError("");
+        }
+    }
+
+    @Override
     public void hideMessageTypeTask() {
         if (tilTypeTask.isErrorEnabled()) {
             tilTypeTask.setErrorEnabled(false);
@@ -160,7 +233,17 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
         }
     }
 
-    void showClock() {
+    @Override
+    public void hideMessagePriority() {
+
+    }
+
+    @Override
+    public void hideMessageStatus() {
+
+    }
+
+    void showCalendar() {
 
         Calendar mCurrentDate = Calendar.getInstance();
 
@@ -171,6 +254,18 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
         DatePickerDialog mDatePicker;
         mDatePicker = new DatePickerDialog(AddTaskActivity.this, this, year, month, day);
         mDatePicker.show();
+    }
+
+    void showClock() {
+        Calendar mCurrentTime = Calendar.getInstance();
+
+        int hour = mCurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mCurrentTime.get(Calendar.MINUTE);
+
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(AddTaskActivity.this, this, hour, minute, false);
+        mTimePicker.show();
+
     }
 
     @Override
@@ -184,5 +279,10 @@ public class AddTaskActivity extends BaseActivity implements AddTaskContract.Vie
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("dd 'de' MMMM 'del' yyyy");
 
         tietDateEnd.setText(sdf.format(date));
+    }
+
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        tietTimeEnd.setText(hourOfDay + ":" + minute);
     }
 }

@@ -25,8 +25,8 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
     }
 
     @Override
-    public boolean validateTitle() {
-        if (view.getTask().getTitle().isEmpty()) {
+    public boolean validateTitleTask() {
+        if (view.getTitleTask().isEmpty()) {
             view.showMessageTitle("Titulo requerido");
             return false;
         }
@@ -35,7 +35,7 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
 
     @Override
     public boolean validateDescription() {
-        if (view.getTask().getDescTask().isEmpty()) {
+        if (view.getDescription().isEmpty()) {
             view.showMessageDescription("Descripción requerida");
             return false;
         }
@@ -44,7 +44,7 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
 
     @Override
     public boolean validateDateEnd() {
-        if (view.getTask().getDateEnd().isEmpty()) {
+        if (view.getDateEnd().isEmpty()) {
             view.showMessageDateEnd("Fecha requerida");
             return false;
         }
@@ -52,8 +52,17 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
     }
 
     @Override
+    public boolean validateTimeEnd() {
+        if (view.getTimeEnd().isEmpty()) {
+            view.showMessageTimeEnd("Hora requerida");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public boolean validateTypeTask() {
-        if (view.getTask().getTypeTask().isEmpty()) {
+        if (view.getTypeTask().isEmpty()) {
             view.showMessageTypeTask("Tipo de tarea requerdida");
             return false;
         }
@@ -61,9 +70,36 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
     }
 
     @Override
+    public boolean validatePriority() {
+        if(view.getPriority().isEmpty())
+        {
+            view.showMessagePriority("Seleccione Prioridad");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean validateStatus() {
+        if (view.getStatus().isEmpty())
+        {
+            view.showMessageStatus("Seleccione Estado");
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public void saveTask() {
-        if (validateTitle() && validateDescription() && validateDateEnd() && validateTypeTask()) {
-            Task mTask = view.getTask();
+        if (validateTitleTask() && validateDescription() && validateDateEnd() && validateTimeEnd() && validateTypeTask() && validatePriority() && validateStatus()) {
+            Task mTask = new Task();
+            mTask.setTitle(view.getTitleTask());
+            mTask.setDescTask(view.getDescription());
+            mTask.setDateEnd(view.getDateEnd()+"-"+view.getTimeEnd());
+            mTask.setTypeTask(view.getTypeTask());
+            mTask.setPriority(view.getPriority());
+            mTask.setStatus(view.getStatus());
+
             new SaveTask(view).execute(mTask);
         }
     }

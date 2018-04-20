@@ -19,7 +19,7 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Task> mTasks;
 
-    TaskAdapter(List<Task> mTasks) {
+    public TaskAdapter(List<Task> mTasks) {
         this.mTasks = mTasks;
     }
 
@@ -40,7 +40,7 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mTasks == null ? 0 : mTasks.size();
     }
 
-    void updateTask(List<Task> taskRows) {
+    public void updateTask(List<Task> taskRows) {
         mTasks = taskRows;
         notifyDataSetChanged();
     }
@@ -52,6 +52,8 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         TextView tvDescription;
         @BindView(R.id.tvDateEnd)
         TextView tvDateEnd;
+        @BindView(R.id.tvTimeEnd)
+        TextView tvTimeEnd;
 
         Task mTask;
 
@@ -65,6 +67,8 @@ public class TaskAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tvTitle.setText(task.getTitle());
             tvDescription.setText(task.getDescTask());
             tvDateEnd.setText(String.valueOf(task.getDateEnd()));
+            tvDateEnd.setText(task.getDateEnd());
+            tvTimeEnd.setText(task.getDateEnd());
         }
     }
 }

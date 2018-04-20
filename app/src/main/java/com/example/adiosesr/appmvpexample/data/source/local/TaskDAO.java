@@ -13,6 +13,10 @@ public interface TaskDAO {
     @Query("SELECT * FROM task")
     List<Task> getTasks();
 
+    @Query("SELECT * FROM task WHERE status LIKE:status")
+    List<Task> filterByStatus(String status);
+
     @Insert
     void insertTask(Task task);
+
 }

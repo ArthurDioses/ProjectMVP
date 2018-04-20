@@ -1,6 +1,5 @@
 package com.example.adiosesr.appmvpexample.active;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -83,6 +82,7 @@ public class ActiveFragment extends Fragment implements ActiveContract.View {
 
     @Override
     public void showList(List<Task> mTasks) {
+
         adapter.updateTask(mTasks);
     }
 
