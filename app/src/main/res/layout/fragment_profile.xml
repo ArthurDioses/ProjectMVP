@@ -3,19 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.adiosesr.appmvpexample.profile.ProfileFragment">
+    tools:weakReference="com.example.adiosesr.appmvpexample.profile.ProfileFragment">
 
     <TextView
         android:id="@+id/tvUsername"
         android:layout_width="@dimen/zerodp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/twentyfourdp"
+        android:layout_marginTop="@dimen/thirtysp"
         android:gravity="center"
         android:textSize="@dimen/thirtysp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnClose"
         tools:text="@string/app_name" />
+
+    <ImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="@dimen/zerodp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/twentyfourdp"
+        android:layout_marginTop="@dimen/twentyfourdp"
+        android:background="@color/colorTransparent"
+        android:src="@drawable/ic_logout"
+        android:text="@string/close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

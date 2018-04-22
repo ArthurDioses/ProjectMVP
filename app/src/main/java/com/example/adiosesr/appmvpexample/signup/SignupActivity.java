@@ -29,9 +29,11 @@ public class SignupActivity extends BaseActivity implements SignupContract.View 
         ButterKnife.bind(this);
 
         presenter = new SignupPresenter(this);
+        presenter.start();
+
     }
 
-    @OnClick(R.id.btnValidate)
+    @OnClick(R.id.btnEnter)
     public void onBtnValidate() {
         presenter.validateField();
     }

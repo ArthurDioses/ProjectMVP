@@ -24,4 +24,10 @@ public class ProfilePresenter implements ProfileContract.Presenter {
     public void start() {
         view.showUsername(preferencesManager.getUserName());
     }
+
+    @Override
+    public void closeSession() {
+        preferencesManager.deleteUserName();
+        view.goToSignup();
+    }
 }

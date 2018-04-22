@@ -19,11 +19,14 @@ public class SignupPresenter implements SignupContract.Presenter {
 
     @Override
     public void start() {
+        if (preferencesManager.hasUserName()) {
+            view.goToHome();
+        }
     }
 
     @Override
     public void validateField() {
-        String value = view.getName();
+        String value = view.getName().trim();
         if (value.isEmpty()) {
             view.showMessage("Valor requerido");
         } else if (value.length() > 10) {
