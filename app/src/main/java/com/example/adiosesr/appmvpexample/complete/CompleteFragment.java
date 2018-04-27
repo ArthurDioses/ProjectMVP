@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.adiosesr.appmvpexample.R;
 import com.example.adiosesr.appmvpexample.active.TaskAdapter;
@@ -24,6 +26,10 @@ public class CompleteFragment extends Fragment implements CompleteContract.View 
 
     @BindView(R.id.rvListComplete)
     RecyclerView rvListComplete;
+    @BindView(R.id.tvEmpty)
+    TextView tvEmpty;
+    @BindView(R.id.ivEmpty)
+    ImageView ivEmpty;
 
     CompleteContract.Presenter presenter;
     TaskAdapter adapter;
@@ -67,7 +73,10 @@ public class CompleteFragment extends Fragment implements CompleteContract.View 
     }
 
     @Override
-    public void ListEmpty() {
-
+    public void listEmpty() {
+        tvEmpty.setVisibility(View.VISIBLE);
+        tvEmpty.setText("Lista tareas completadas vacía");
+        ivEmpty.setVisibility(View.VISIBLE);
+        ivEmpty.setImageResource(R.drawable.ic_clipboard);
     }
 }

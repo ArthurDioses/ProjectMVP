@@ -2,6 +2,8 @@ package com.example.adiosesr.appmvpexample.addTask;
 
 import com.example.adiosesr.appmvpexample.BasePresenter;
 import com.example.adiosesr.appmvpexample.BaseView;
+import com.example.adiosesr.appmvpexample.model.Task;
+
 
 public interface AddTaskContract {
     interface View extends BaseView<Presenter> {
@@ -16,12 +18,7 @@ public interface AddTaskContract {
 
         String getPriority();
 
-        String getStatus();
-
         String getTitleTask();
-
-
-//        Task getTask();
 
         void closeActivity();
 
@@ -34,8 +31,8 @@ public interface AddTaskContract {
         void showMessageTimeEnd(String message);
 
         void showMessageTypeTask(String message);
+
         void showMessagePriority(String message);
-        void showMessageStatus(String message);
 
         void hideMessageTitle();
 
@@ -46,11 +43,15 @@ public interface AddTaskContract {
         void hideMessageTimeEnd();
 
         void hideMessageTypeTask();
-        void hideMessagePriority();
-        void hideMessageStatus();
+
+
+        void showListaTaskSelected(Task task);
+
+        int getIdTask();
     }
 
     interface Presenter extends BasePresenter {
+
         boolean validateTitleTask();
 
         boolean validateDescription();
@@ -63,8 +64,12 @@ public interface AddTaskContract {
 
         boolean validatePriority();
 
-        boolean validateStatus();
-
         void saveTask();
+
+        void editTask();
+
+        void listTaskById(int idTask);
+
+        void deleteTask();
     }
 }

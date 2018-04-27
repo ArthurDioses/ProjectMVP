@@ -31,4 +31,5 @@ public class Navigator {
         activity.setResult(Activity.RESULT_OK,intent);
         activity.finish();
     }
+
 }

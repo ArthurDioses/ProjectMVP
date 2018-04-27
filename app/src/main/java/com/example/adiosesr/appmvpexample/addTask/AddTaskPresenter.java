@@ -71,36 +71,82 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
 
     @Override
     public boolean validatePriority() {
-        if(view.getPriority().isEmpty())
-        {
+        if (view.getPriority().isEmpty()) {
             view.showMessagePriority("Seleccione Prioridad");
             return false;
         }
         return true;
     }
 
-    @Override
-    public boolean validateStatus() {
-        if (view.getStatus().isEmpty())
-        {
-            view.showMessageStatus("Seleccione Estado");
-            return false;
-        }
-        return true;
-    }
 
     @Override
     public void saveTask() {
-        if (validateTitleTask() && validateDescription() && validateDateEnd() && validateTimeEnd() && validateTypeTask() && validatePriority() && validateStatus()) {
+        if (validateTitleTask() &&
+                validateDescription() &&
+                validateDateEnd() &&
+                validateTimeEnd() &&
+                validateTypeTask() &&
+                validatePriority()) {
             Task mTask = new Task();
             mTask.setTitle(view.getTitleTask());
             mTask.setDescTask(view.getDescription());
-            mTask.setDateEnd(view.getDateEnd()+"-"+view.getTimeEnd());
+            mTask.setDateEnd(view.getDateEnd() + "-" + view.getTimeEnd());
             mTask.setTypeTask(view.getTypeTask());
             mTask.setPriority(view.getPriority());
-            mTask.setStatus(view.getStatus());
+            mTask.setStatus("Pendiente");
 
             new SaveTask(view).execute(mTask);
+        }
+    }
+
+    @Override
+    public void editTask() {
+        if (validateTitleTask() &&
+                validateDescription() &&
+                validateDateEnd() &&
+                validateTimeEnd() &&
+                validateTypeTask() &&
+                validatePriority()) {
+            Task mTask = new Task();
+            mTask.setIdTask(view.getIdTask());
+            mTask.setTitle(view.getTitleTask());
+            mTask.setDescTask(view.getDescription());
+            mTask.setDateEnd(view.getDateEnd() + "-" + view.getTimeEnd());
+            mTask.setTypeTask(view.getTypeTask());
+            mTask.setPriority(view.getPriority());
+            mTask.setStatus("Pendiente");
+
+            new EditTask(view).execute(mTask);
+        }
+    }
+
+    @Override
+    public void listTaskById(int idTask) {
+        new GetTaskSelected(view).execute(idTask);
+    }
+
+    @Override
+    public void deleteTask() {
+        new DeleteTask(view).execute(view.getIdTask());
+    }
+
+    private static class DeleteTask extends AsyncTask<Integer,Void,Void>{
+        private WeakReference<AddTaskContract.View> weakReference;
+
+        public DeleteTask(AddTaskContract.View view) {
+            this.weakReference = new WeakReference<>(view);
+        }
+
+        @Override
+        protected Void doInBackground(Integer... integers) {
+            AppDatabase.getInstance(weakReference.get().context()).taskDAO().deleteTask(integers[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            weakReference.get().closeActivity();
         }
     }
 
@@ -123,5 +169,45 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
             weakReference.get().closeActivity();
         }
     }
-}
+    private  static class EditTask extends AsyncTask<Task,Void,Void>{
+        private WeakReference<AddTaskContract.View> weakReference;
 
+        EditTask(AddTaskContract.View view){
+            this.weakReference = new WeakReference<>(view);
+        }
+
+        @Override
+        protected Void doInBackground(Task... tasks) {
+            AppDatabase.getInstance(weakReference.get().context()).taskDAO().updateTask(tasks[0].getIdTask(),tasks[0].getTitle(),
+                    tasks[0].getDescTask(),tasks[0].getDateEnd(),tasks[0].getTypeTask(),tasks[0].getPriority());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            weakReference.get().closeActivity();
+        }
+    }
+
+    private static class GetTaskSelected extends AsyncTask<Integer, Void, Task> {
+        private WeakReference<AddTaskContract.View> weakReference;
+
+        GetTaskSelected(AddTaskContract.View view) {
+            this.weakReference = new WeakReference<>(view);
+        }
+
+        @Override
+        protected Task doInBackground(Integer... integers) {
+            return AppDatabase.getInstance(weakReference.get().context()).taskDAO().filterByidTask(integers[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Task task) {
+            super.onPostExecute(task);
+            if (task != null) {
+                weakReference.get().showListaTaskSelected(task);
+            }
+        }
+    }
+}

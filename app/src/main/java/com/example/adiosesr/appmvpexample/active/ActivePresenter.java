@@ -38,7 +38,7 @@ public class ActivePresenter implements ActiveContract.Presenter {
         @Override
         protected void onPostExecute(List<Task> taskList) {
             super.onPostExecute(taskList);
-            if(taskList!=null || !taskList.isEmpty())
+            if(taskList!=null && !taskList.isEmpty())
             {
                 weakReference.get().showList(taskList);
             }

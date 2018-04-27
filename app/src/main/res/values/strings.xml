@@ -6,4 +6,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="close">Cerrar</string>
+    <string name="title">Titulo</string>
+    <string name="description">Descripción</string>
+    <string name="date">Fecha</string>
+    <string name="hour">Hora</string>
+    <string name="typeTask">Tipo Tarea</string>
 </resources>

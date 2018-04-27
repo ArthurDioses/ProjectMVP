@@ -66,4 +66,16 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.6" />
 
+    <Button
+        android:id="@+id/btnComplete"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorWindowsBackGround"
+        android:text="Completar"
+        android:textColor="@color/colorTextPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimeEnd" />
+
 </android.support.constraint.ConstraintLayout>

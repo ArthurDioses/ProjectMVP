@@ -44,7 +44,7 @@ public class CompletePresenter implements CompleteContract.Presenter {
                 weakReference.get().showListComplete(taskList);
             }
             else {
-                weakReference.get().ListEmpty();
+                weakReference.get().listEmpty();
             }
         }
     }

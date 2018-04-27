@@ -11,7 +11,7 @@ public interface CompleteContract {
 
     interface View extends BaseView<Presenter>{
         void showListComplete(List<Task> taskComplete);
-        void ListEmpty();
+        void listEmpty();
     }
     interface Presenter extends BasePresenter{
 
