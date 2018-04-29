@@ -13,4 +13,5 @@
     <dimen name="twentyfivesp">25sp</dimen>
     <dimen name="thirtysp">30sp</dimen>
     <dimen name="fifteensp">15sp</dimen>
+    <dimen name="twetyEightdp">28dp</dimen>
 </resources>

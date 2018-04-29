@@ -1,6 +1,5 @@
 package com.example.adiosesr.appmvpexample.active;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.adiosesr.appmvpexample.R;
+import com.example.adiosesr.appmvpexample.TaskClickListener;
+import com.example.adiosesr.appmvpexample.addTask.AddTaskActivity;
+import com.example.adiosesr.appmvpexample.data.source.Extras;
 import com.example.adiosesr.appmvpexample.model.Task;
 import com.example.adiosesr.appmvpexample.util.Navigator;
 
@@ -27,6 +31,10 @@ public class ActiveFragment extends Fragment implements ActiveContract.View {
 
     @BindView(R.id.rvListTask)
     RecyclerView rvListTask;
+    @BindView(R.id.tvEmpty)
+    TextView tvEmpty;
+    @BindView(R.id.ivEmpty)
+    ImageView ivEmpty;
 
     ActiveContract.Presenter presenter;
 
@@ -52,7 +60,14 @@ public class ActiveFragment extends Fragment implements ActiveContract.View {
         rvListTask.setLayoutManager(layoutManager);
 
         presenter = new ActivePresenter(this);
-        adapter = new TaskAdapter(null);
+        adapter = new TaskAdapter(new TaskClickListener() {
+            @Override
+            public void onClick(int  idTask) {
+                Intent intent = new Intent(getActivity(), AddTaskActivity.class);
+                intent.putExtra(Extras.EXTRAS_TASK.getExtra(), idTask);
+                startActivity(intent);
+            }
+        });
         rvListTask.setAdapter(adapter);
         presenter.start();
 
@@ -83,11 +98,15 @@ public class ActiveFragment extends Fragment implements ActiveContract.View {
 
     @Override
     public void showList(List<Task> mTasks) {
+
         adapter.updateTask(mTasks);
     }
 
     @Override
     public void emptyList() {
-
+        tvEmpty.setVisibility(View.VISIBLE);
+        tvEmpty.setText("Lista tareas activas vacía");
+        ivEmpty.setVisibility(View.VISIBLE);
+        ivEmpty.setImageResource(R.drawable.ic_clipboard);
     }
 }

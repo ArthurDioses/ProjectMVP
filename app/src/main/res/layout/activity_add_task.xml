@@ -14,7 +14,7 @@
             android:id="@+id/tilTitle"
             android:layout_width="@dimen/zerodp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/twetyEightdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent">
@@ -24,17 +24,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_title_black_24dp"
-                android:hint="Titulo"
-                android:inputType="text"
+                android:hint="@string/title"
+                android:inputType="textCapSentences"
                 android:singleLine="true"
                 android:textSize="@dimen/fifteensp" />
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:visibility="gone"
+            android:id="@+id/fabEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_edit_black_24dp"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:visibility="gone"
+            android:id="@+id/fabDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_delete_black_24dp"
+            app:fabSize="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fabEdit" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/tilDescription"
             android:layout_width="@dimen/zerodp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/twetyEightdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/tilTitle">
@@ -44,7 +68,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_description_black_24dp"
-                android:hint="Descripción"
+                android:hint="@string/description"
+                android:inputType="textCapSentences"
                 android:singleLine="true"
                 android:textSize="@dimen/fifteensp" />
         </android.support.design.widget.TextInputLayout>
@@ -53,7 +78,7 @@
             android:id="@+id/tilDateEnd"
             android:layout_width="@dimen/zerodp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/twetyEightdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/tilDescription">
@@ -62,44 +87,137 @@
                 android:id="@+id/tietDateEnd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:drawableLeft="@drawable/ic_access_time_black_24dp"
-                android:editable="false"
-                android:focusable="true"
-                android:hint="Hora"
+                android:drawableStart="@drawable/ic_date_range_black_24dp"
+                android:hint="@string/date"
                 android:singleLine="true"
                 android:textSize="@dimen/fifteensp"
                 tools:ignore="Deprecated" />
+
+            <!--android:focusableInTouchMode="false"-->
+            <!--android:focusable="true"-->
+            <!--android:clickable="true"-->
+            <!--android:editable="false"-->
+
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/tilTypeTask"
+            android:id="@+id/tilTimeEnd"
             android:layout_width="@dimen/zerodp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="@dimen/twetyEightdp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toBottomOf="@+id/tilDateEnd">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/tietTimeEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:drawableStart="@drawable/ic_access_time_black_24dp"
+
+                android:hint="@string/hour"
+                android:singleLine="true"
+                android:textSize="@dimen/fifteensp"
+                tools:ignore="Deprecated" />
+            <!--android:focusableInTouchMode="false"-->
+            <!--android:focusable="true"-->
+            <!--android:clickable="true"-->
+            <!--android:editable="false"-->
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tilTypeTask"
+            android:inputType="textCapSentences"
+            android:layout_width="@dimen/zerodp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/twetyEightdp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tilTimeEnd">
+
+            <android.support.design.widget.TextInputEditText
                 android:id="@+id/tietTypeTask"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Tipo Tarea"
+                android:hint="@string/typeTask"
                 android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
-        <Spinner
-            android:id="@+id/spPriority"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:entries="@array/priority"
-            android:spinnerMode="dialog"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/tilTypeTask"
-            tools:listitem="@tools:sample/first_names" />
 
+        <TextView
+            android:id="@+id/tvPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Prioridad :"
+            android:textSize="@dimen/twentysp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tilTypeTask" />
+
+        <ImageView
+            android:id="@+id/ivLow"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_baja_gray"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="@+id/ivNormal" />
+
+        <TextView
+            android:id="@+id/tvLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Baja"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/ivLow"
+            app:layout_constraintStart_toStartOf="@+id/ivLow"
+            app:layout_constraintTop_toBottomOf="@+id/ivLow" />
+
+        <ImageView
+            android:id="@+id/ivNormal"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/ic_normal_gray"
+            app:layout_constraintEnd_toStartOf="@+id/ivHigh"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivLow"
+            app:layout_constraintTop_toBottomOf="@+id/tvPriority" />
+
+        <TextView
+            android:id="@+id/tvNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/ivNormal"
+            app:layout_constraintStart_toStartOf="@+id/ivNormal"
+            app:layout_constraintTop_toBottomOf="@+id/ivNormal" />
+
+        <ImageView
+            android:id="@+id/ivHigh"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="41dp"
+            android:src="@drawable/ic_alta_gray"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toEndOf="@+id/ivNormal"
+            app:layout_constraintTop_toTopOf="@+id/ivNormal" />
+
+        <TextView
+            android:id="@+id/tvHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alta"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/ivHigh"
+            app:layout_constraintStart_toStartOf="@+id/ivHigh"
+            app:layout_constraintTop_toBottomOf="@+id/ivHigh" />
 
         <Button
             android:id="@+id/btnSave"
@@ -107,28 +225,29 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/button_corner"
             android:text="Guardar"
             android:textColor="@color/colorTextPrimary"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
-            app:layout_constraintTop_toBottomOf="@+id/spPriority" />
+            app:layout_constraintTop_toBottomOf="@+id/ivNormal" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.1" />
+            app:layout_constraintGuide_percent="0.08" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
+            app:layout_constraintGuide_percent="0.85" />
+
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

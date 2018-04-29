@@ -18,4 +18,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--<style name="UpdateImage" parent="DefaultImage">-->
+        <!--<item name="circle">#5D9BEB</item>-->
+        <!--<item name="shadow">#4988DB</item>-->
+    <!--</style>-->
+    <!--<style name="DefaultImage">-->
+        <!--<item name="circle">#979797</item>-->
+        <!--<item name="shadow">#979797</item>-->
+    <!--</style>-->
+
 </resources>

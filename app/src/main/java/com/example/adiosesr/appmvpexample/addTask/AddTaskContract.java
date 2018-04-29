@@ -4,9 +4,21 @@ import com.example.adiosesr.appmvpexample.BasePresenter;
 import com.example.adiosesr.appmvpexample.BaseView;
 import com.example.adiosesr.appmvpexample.model.Task;
 
+
 public interface AddTaskContract {
     interface View extends BaseView<Presenter> {
-        Task getTask();
+
+        String getDescription();
+
+        String getDateEnd();
+
+        String getTimeEnd();
+
+        String getTypeTask();
+
+        String getPriority();
+
+        String getTitleTask();
 
         void closeActivity();
 
@@ -16,7 +28,11 @@ public interface AddTaskContract {
 
         void showMessageDateEnd(String message);
 
+        void showMessageTimeEnd(String message);
+
         void showMessageTypeTask(String message);
+
+        void showMessagePriority(String message);
 
         void hideMessageTitle();
 
@@ -24,20 +40,36 @@ public interface AddTaskContract {
 
         void hideMessageDateEnd();
 
+        void hideMessageTimeEnd();
+
         void hideMessageTypeTask();
 
 
+        void showListaTaskSelected(Task task);
+
+        int getIdTask();
     }
 
     interface Presenter extends BasePresenter {
-        boolean validateTitle();
+
+        boolean validateTitleTask();
 
         boolean validateDescription();
 
         boolean validateDateEnd();
 
+        boolean validateTimeEnd();
+
         boolean validateTypeTask();
 
+        boolean validatePriority();
+
         void saveTask();
+
+        void editTask();
+
+        void listTaskById(int idTask);
+
+        void deleteTask();
     }
 }

@@ -11,6 +11,7 @@
         android:theme="@style/MyMaterialTheme">
         <activity
             android:name=".signup.SignupActivity"
+            android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".home.HomeActivity" />
-        <activity android:name=".addTask.AddTaskActivity"></activity>
+        <activity android:name=".addTask.AddTaskActivity" />
+        <activity android:name=".detailTask.DetailTaskActivity"></activity>
     </application>
 
 </manifest>

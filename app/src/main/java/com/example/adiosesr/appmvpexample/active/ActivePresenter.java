@@ -22,7 +22,7 @@ public class ActivePresenter implements ActiveContract.Presenter {
         new GetTask(view).execute();
     }
 
-    private static class GetTask extends AsyncTask<Void, Void, List<Task>> {
+    private static class GetTask extends AsyncTask<String, Void, List<Task>> {
 
         private WeakReference<ActiveContract.View> weakReference;
 
@@ -31,17 +31,19 @@ public class ActivePresenter implements ActiveContract.Presenter {
         }
 
         @Override
-        protected List<Task> doInBackground(Void... voids) {
-            return AppDatabase.getInstance(weakReference.get().context()).taskDAO().getTasks();
+        protected List<Task> doInBackground(String... strings) {
+            return AppDatabase.getInstance(weakReference.get().context()).taskDAO().filterByStatus("Pendiente");
         }
 
         @Override
-        protected void onPostExecute(List<Task> tasks) {
-            super.onPostExecute(tasks);
-
-            if (tasks != null && !tasks.isEmpty()) {
-                weakReference.get().showList(tasks);
-            } else {
+        protected void onPostExecute(List<Task> taskList) {
+            super.onPostExecute(taskList);
+            if(taskList!=null && !taskList.isEmpty())
+            {
+                weakReference.get().showList(taskList);
+            }
+            else
+            {
                 weakReference.get().emptyList();
             }
         }
